@@ -13,7 +13,7 @@ Lockbox lockbox(PA_1, PA_15, PC_3);
 int main(){
     while (1) {
         
-        lockbox.fsr_alarm();
+        lockbox.PlayForceAlarm();
         
     }
 }

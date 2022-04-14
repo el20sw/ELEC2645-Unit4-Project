@@ -17,16 +17,16 @@
 #define NOTE_B4  494
 #define NOTE_C5  523
 
-class Alarm{
+class Alarm {
     public:
         //constructors
         Alarm(PinName buzzerPin);
         //destructor
         //~Alarm(); redundant when using direct initialisation
         //mutators
-        void play_note(int frequency);
+        void PlayNote(int frequency);
             //Method to play a single note
-        void setpulse_us(int pulse_us);
+        void SetPulse_us(int pulse_us);
             //Method to set the pulsewidth of the signal
         //accessors
         //nothing here for now

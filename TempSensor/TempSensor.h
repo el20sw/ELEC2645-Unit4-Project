@@ -7,27 +7,27 @@
 
 #include "mbed.h"
 
-class Temp_Sensor{
+class TempSensor {
     public:
         //constructor
-        Temp_Sensor(PinName tmpPin);
+        TempSensor(PinName tmpPin);
         //mutators
-        void set_Temp();
-            //assigns read value to _temp variable
-        void set_MaxTemp(int maxTemp);
+        void ReadTemp();
+            //assigns read value to _TempValue variable
+        void SetThresholdTemp(int maxTemp);
         //accessors
-        float get_Temp();   
+        float GetTempValue();   
             //returns current temperature Value
         bool isExceeded();
             //returns true if current temperature value exceeds setTemp
-        void print_Temp();
+        void PrintTempValue();
             //method to print Temp data to monitor in celcius
 
     private:
         AnalogIn *_inputPin;
 
-        float _temp;
-        float _maxTemp;
+        float _TempValue;
+        float _MaxTempValue;
 
         //friend class Lockbox;
 

@@ -2,34 +2,34 @@
 *   Used to interface with FSR sensor
 */
 
-#ifndef FSR_SENSOR_H
-#define FSR_SENSOR_H
+#ifndef FORCE_SENSOR_H
+#define FORCE_SENSOR_H
 
 #include "mbed.h"
 #include <cstdio>
 
-class FSR_Sensor {
+class ForceSensor {
     public:
         //constructors
-        FSR_Sensor(PinName fsrPin);
+        ForceSensor(PinName fsrPin);
         //destructors
-        ~FSR_Sensor();
+        ~ForceSensor();
         //mutators
-        void set_FSR();
+        void ReadFSR();
             // Reads from the assigned pin and assigns to a variable
-        void set_max_FSR(float max_FSR);       
+        void SetThresholdFSR(float MaxForceValue);       
             //method to set threshold FSR - currently redundant
         //accessors
-        float get_FSR();                         
+        float GetForceValue();                         
             //returns FSR sensor data as float
-        void print_FSR();                              
+        void PrintForceValue();                              
              //method to print FSR data to monitor as percentage
 
     private:
         AnalogIn *_inputPin;
 
-        float _FSR_Val;
-        float _max_FSR;
+        float _ForceValue;
+        float _MaxForceValue;
 
         //friend class Lockbox;
 };

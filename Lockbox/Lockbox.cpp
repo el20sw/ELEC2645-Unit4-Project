@@ -1,22 +1,22 @@
 #include "Lockbox.h"
 
 Lockbox::Lockbox(PinName fsrPin, PinName buzzerPin, PinName tmpPin) 
-    : FSR_Sensor(fsrPin), Alarm(buzzerPin), Temp_Sensor(tmpPin) {
+    : ForceSensor(fsrPin), Alarm(buzzerPin), TempSensor(tmpPin) {
         lcd_control = new LCD_Controller();
         lcd_control -> customInit();
     }
 
-void Lockbox::fsr_alarm(){
+void Lockbox::PlayForceAlarm(){
     float val;
-        set_FSR();
-        print_FSR();
-        val = get_FSR();
+        ReadFSR();
+        PrintForceValue();
+        val = GetForceValue();
         if (val > 0.6) {
             lcd_control -> dispAlert();
-            play_note(NOTE_C5);
+            PlayNote(NOTE_C5);
         } else {
             //turn off buzzer
-            setpulse_us(0);
+            SetPulse_us(0);
             lcd_control -> clearLCD();
         }
         

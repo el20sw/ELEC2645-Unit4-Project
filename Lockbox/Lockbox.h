@@ -9,14 +9,14 @@
 #include "mbed.h"
 #include "Joystick.h"
 #include "LCD_Controller.h"
-#include "FSR_Sensor.h"
+#include "ForceSensor.h"
 #include "Alarm.h"
-#include "Temp_Sensor.h"
+#include "TempSensor.h"
 
 class Lockbox : 
-    public FSR_Sensor, 
+    public ForceSensor, 
     public Alarm, 
-    public Temp_Sensor {
+    public TempSensor {
     
     public:
         //constructor
@@ -27,7 +27,7 @@ class Lockbox :
 
         //methods
         //Sounds single note when FSR exceeds 60%
-        void fsr_alarm();
+        void PlayForceAlarm();
 
 };
 
