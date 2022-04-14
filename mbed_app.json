@@ -1,0 +1,9 @@
+{
+    "target_overrides": {
+            "*": {
+                "target.printf_lib": "minimal-printf",
+                "platform.minimal-printf-enable-floating-point": true,
+                "platform.stdio-minimal-console-only": true
+            }
+        }
+}
