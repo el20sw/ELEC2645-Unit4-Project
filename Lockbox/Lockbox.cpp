@@ -2,7 +2,7 @@
 
 Lockbox::Lockbox(PinName fsrPin, PinName buzzerPin, PinName tmpPin) 
     : ForceSensor(fsrPin), Alarm(buzzerPin), TempSensor(tmpPin) {
-        lcd_control = new LCD_Controller();
+        lcd_control = new ScreenController();
         lcd_control -> customInit();
     }
 

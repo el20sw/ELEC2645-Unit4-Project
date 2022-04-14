@@ -1,23 +1,23 @@
-/*  LCD Controller Class
+/*  Screen Controller Class
 *   Methods for interfacing with LCD
 */
 
-#ifndef LCD_CONTROLLER_H
-#define LCD_CONTROLLER_H
+#ifndef SCREEN_CONTROLLER_H
+#define SCREEN_CONTROLLER_H
 
 #include "mbed.h"
 #include "N5110.h"
 
-class LCD_Controller{
+class ScreenController{
     public:
         //LCD (N5110) Object
         N5110 *lcd;
 
         //constructor
-        LCD_Controller();
+        ScreenController();
 
         //turn Off LCD
-        void lcdOff();
+        void ScreenOff();
 
         //custom initialisation of LCD
         void customInit();

@@ -8,7 +8,7 @@
 
 #include "mbed.h"
 #include "Joystick.h"
-#include "LCD_Controller.h"
+#include "ScreenController.h"
 #include "ForceSensor.h"
 #include "Alarm.h"
 #include "TempSensor.h"
@@ -23,7 +23,7 @@ class Lockbox :
         Lockbox(PinName fsrPin, PinName buzzerPin, PinName tmpPin);
 
         //LCD Controller object
-        LCD_Controller *lcd_control;
+        ScreenController *lcd_control;
 
         //methods
         //Sounds single note when FSR exceeds 60%
