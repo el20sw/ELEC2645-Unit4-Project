@@ -21,7 +21,12 @@ void ScreenController::clearLCD() {
 }
 
 void ScreenController::dispAlert() {
-        lcd -> printString(" Alert ", 4, 1);
-        lcd -> refresh();
-        //ThisThread::sleep_for(2s);
+    lcd -> printString(" Alert ", 20, 2);
+    lcd -> refresh();
+    //ThisThread::sleep_for(2s);
+}
+
+void ScreenController::dispLocked() {
+    lcd -> printString(" Locked ", 5, 3);
+    lcd -> refresh();
 }

@@ -13,17 +13,20 @@
 #include "Alarm.h"
 #include "TempSensor.h"
 
-class Lockbox : 
-    public ForceSensor, 
-    public Alarm, 
-    public TempSensor {
+class Lockbox {
     
     public:
         //constructor
         Lockbox(PinName fsrPin, PinName buzzerPin, PinName tmpPin);
 
-        //LCD Controller object
+        //Screen Controller object - as pointer
         ScreenController *lcd_control;
+        //Force Sensor object - as object
+        ForceSensor force_sensor;
+        //Alarm Sensor object - as object
+        Alarm alarm;
+        //Temperature Sensor object - as object
+        TempSensor temp_sensor;
 
         //methods
         //Sounds single note when FSR exceeds 60%
