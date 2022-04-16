@@ -2,7 +2,7 @@
 *   High level interface with joystick and lcd to set a passcode or unlock
 */
 
-/*
+
     #ifndef ACCESS_MANAGER_H
     #define ACCESS_MANAGER_H
 
@@ -46,4 +46,3 @@
     };
 
     #endif
-*/

@@ -1,4 +1,3 @@
-/*
     #include "AccessManager.h"
     #include <cstdio>
 
@@ -84,4 +83,3 @@
             printf("Movement 2: NW");
         }
     }
-*/
