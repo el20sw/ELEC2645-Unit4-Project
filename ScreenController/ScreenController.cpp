@@ -49,7 +49,7 @@ void ScreenController::RequestSecondMotion() {
     _lcd -> refresh();
 }
 
-void ScreenController::PasswordSetAffirmative() {
-    _lcd -> printString("Password Set", 1, 1);
+void ScreenController::PasscodeSetAffirmative() {
+    _lcd -> printString("Passcode Set", 1, 1);
     _lcd -> refresh();
 }
