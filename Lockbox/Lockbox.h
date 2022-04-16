@@ -22,6 +22,16 @@ class Lockbox {
 
         //move to private?
 
+        
+
+        //methods
+        //Sounds single note when FSR exceeds 60%
+        void PlayForceAlarm();
+
+        void AccessManagerInit();
+        void ShowPasscode();
+
+    private:
         //Screen Controller object - as pointer
         ScreenController *screen;
         //Force Sensor object - as object
@@ -32,13 +42,6 @@ class Lockbox {
         TempSensor temp_sensor;
         //Access Manager object
         AccessManager *access_manager;
-
-        //methods
-        //Sounds single note when FSR exceeds 60%
-        void PlayForceAlarm();
-
-        void AccessManagerInit();
-        void ShowPasscode();
 
 };
 
