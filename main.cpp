@@ -7,7 +7,7 @@
 
 BufferedSerial pc(USBTX, USBRX, 115200);
 //              FSR  Buzzer  Temp
-Lockbox lockbox(PA_1, PA_15, PC_3);
+Lockbox lockbox(PA_1, PA_15, PC_5);
 
 
 int main(){

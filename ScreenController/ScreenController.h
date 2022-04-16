@@ -8,13 +8,14 @@
 #include "mbed.h"
 #include "N5110.h"
 
-class ScreenController{
+class ScreenController {
     public:
-        //LCD (N5110) Object
-        N5110 *lcd;
+        
 
         //constructor
         ScreenController();
+        //destructor
+        //~ScreenController();
 
         //turn Off LCD
         void ScreenOff();
@@ -34,7 +35,18 @@ class ScreenController{
         //LCD Displays Unlocked
         void dispUnlocked();
 
+        //LCD Displays Set 1st Passcode action
+        void RequestFirstMotion();
+
+        //LCD Displays Set 2nd Passcode action
+        void RequestSecondMotion();
+
+        //Password Set Affirmative
+        void PasswordSetAffirmative();
+
     private:
+        //LCD (N5110) Object
+        N5110 *_lcd;
 
 };
 
