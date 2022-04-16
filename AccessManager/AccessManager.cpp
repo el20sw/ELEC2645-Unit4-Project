@@ -4,6 +4,8 @@
     AccessManager::AccessManager(ScreenController *screen) : _passcode() {
         //                         y     x
         _joystick = new Joystick(PC_3, PC_2);
+        _joystick -> Joystick::init();
+
         //_lockScreen = new ScreenController();
         _lockScreen = screen;
     }
@@ -28,10 +30,13 @@
         
         //store direction in passcode
         _passcode.movement1 = d;
+        
+        //wait until centered
+        if (d != CENTRE) {ThisThread::sleep_for(1s);}   //not overly happy with this method alternatives?
 
         //check again for direction that isn't center
         _lockScreen -> clearLCD();
-        _lockScreen -> RequestFirstMotion();
+        _lockScreen -> RequestSecondMotion();
         do {
             d = _joystick -> get_direction();
         } while (d == CENTRE);

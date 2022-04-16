@@ -38,12 +38,14 @@ void ScreenController::dispLocked() {
 }
 
 void ScreenController::RequestFirstMotion() {
-    _lcd -> printString("Set First Motion:", 1, 1);
+    _lcd -> printString("Set First", 0, 1);
+    _lcd -> printString("Motion:", 0, 2);
     _lcd -> refresh();
 }
 
 void ScreenController::RequestSecondMotion() {
-    _lcd -> printString("Set Second Motion:", 1, 1);
+    _lcd -> printString("Set Second", 0, 1);
+    _lcd -> printString("Motion:", 0, 2);
     _lcd -> refresh();
 }
 
