@@ -29,6 +29,12 @@
             //methods
             //method to set a passcode
             void SetPasscode();
+                //method to set first motion
+                Direction SetFirstMotion();
+                //method to set second motion
+                Direction SetSecondMotion();
+                //method to check if joystick is centered
+                bool isCenter();
             //method to print the passcode
             void PrintPasscode();
             //method to enter a passcode
