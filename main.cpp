@@ -11,8 +11,11 @@ Lockbox lockbox(PA_1, PA_15, PC_5);
 
 
 int main(){
+
+    lockbox.ShowPasscode();
+
     while (1) {
-        
+
         lockbox.PlayForceAlarm();
         
     }

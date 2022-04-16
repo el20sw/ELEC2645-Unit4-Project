@@ -7,7 +7,7 @@
 #define LOCKBOX_H
 
 #include "mbed.h"
-//#include "AccessManager.h"
+#include "AccessManager.h"
 #include "ScreenController.h"
 #include "ForceSensor.h"
 #include "Alarm.h"
@@ -31,13 +31,13 @@ class Lockbox {
         //Temperature Sensor object - as object
         TempSensor temp_sensor;
         //Access Manager object
-        //AccessManager *access_manager;
+        AccessManager *access_manager;
 
         //methods
         //Sounds single note when FSR exceeds 60%
         void PlayForceAlarm();
 
-        //void ShowPasscode();
+        void ShowPasscode();
 
 };
 
