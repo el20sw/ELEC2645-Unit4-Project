@@ -32,21 +32,26 @@
         _passcode.movement1 = d;
         
         //wait until centered
-        if (d != CENTRE) {ThisThread::sleep_for(1s);}   //not overly happy with this method alternatives?
+        //if (d != CENTRE) ThisThread::sleep_for(1s);     //not overly happy with this method, alternatives?
 
-        //check again for direction that isn't center
-        _lockScreen -> clearLCD();
-        _lockScreen -> RequestSecondMotion();
-        do {
-            d = _joystick -> get_direction();
-        } while (d == CENTRE);
+        if (d != CENTRE) {
+            //do nothing
+        } else {
+            //check again for direction that isn't center
+            _lockScreen -> clearLCD();
+            _lockScreen -> RequestSecondMotion();
+            do {
+                d = _joystick -> get_direction();
+            } while (d == CENTRE);
 
-        //store direction in passcode
-        _passcode.movement2 = d;
+            //store direction in passcode
+            _passcode.movement2 = d;
+        }
 
         //clear LCD
+        ThisThread::sleep_for(100ms);
         _lockScreen -> clearLCD();
-        _lockScreen -> PasswordSetAffirmative();
+        _lockScreen -> PasscodeSetAffirmative();
         
     }
 
@@ -69,6 +74,7 @@
         } else if (code1 == NW) {
             printf("Movement 1: NW");
         }
+        printf("\n");
 
         #define code2   _passcode.movement2
         if (code2 == N) {
@@ -88,4 +94,5 @@
         } else if (code2 == NW) {
             printf("Movement 2: NW");
         }
+        printf("\n");
     }
