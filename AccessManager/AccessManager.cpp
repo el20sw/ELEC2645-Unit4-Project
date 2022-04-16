@@ -1,10 +1,11 @@
     #include "AccessManager.h"
     #include <cstdio>
 
-    AccessManager::AccessManager() : _passcode() {
+    AccessManager::AccessManager(ScreenController *screen) : _passcode() {
         //                         y     x
         _joystick = new Joystick(PC_3, PC_2);
-        _lockScreen = new ScreenController();
+        //_lockScreen = new ScreenController();
+        _lockScreen = screen;
     }
 
     

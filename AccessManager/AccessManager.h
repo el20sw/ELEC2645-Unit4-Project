@@ -22,7 +22,7 @@
         public:
             //constructor
             AccessManager();
-            //AccessManager(ScreenController *screen);
+            AccessManager(ScreenController *screen);
             //destructor
             ~AccessManager();
 
