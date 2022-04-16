@@ -43,6 +43,15 @@
             do {
                 d = _joystick -> get_direction();
             } while (d == CENTRE);
+            
+        if (d != CENTRE) {ThisThread::sleep_for(1s);}   //not overly happy with this method alternatives?
+
+        //check again for direction that isn't center
+        _lockScreen -> clearLCD();
+        _lockScreen -> RequestSecondMotion();
+        do {
+            d = _joystick -> get_direction();
+        } while (d == CENTRE);
 
             //store direction in passcode
             _passcode.movement2 = d;
