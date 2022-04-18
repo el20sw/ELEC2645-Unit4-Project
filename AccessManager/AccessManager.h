@@ -34,9 +34,7 @@
             //method to enter a passcode
             void EnterPasscode();
             //method to get state of lockbox
-            int GetState();
-            //method to set state of lockbox
-            void SetState();
+            bool isLocked(int state);
 
 
         private:
