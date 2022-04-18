@@ -29,25 +29,32 @@
             //methods
             //method to set a passcode
             void SetPasscode();
-                //method to set first motion
-                Direction SetFirstMotion();
-                //method to set second motion
-                Direction SetSecondMotion();
-                //method to check if joystick is centered
-                bool isCenter();
             //method to print the passcode
             void PrintPasscode();
             //method to enter a passcode
             void EnterPasscode();
+            //method to get state of lockbox
+            int GetState();
+            //method to set state of lockbox
+            void SetState();
 
 
         private:
             //Joystick Object
             Joystick *_joystick;
-            //Passcode Object
+            //Stored Passcode Object
             Passcode _passcode;
+            //Inputted Passcode Object
+            Passcode _input;
             //Screen Controller Object
             ScreenController *_lockScreen;
+
+            //method to check if joystick is centered
+            bool isCenter();
+            //method to enter first motion
+            Direction _EnterFirstMotion();
+            //method to enter second motion
+            Direction _EnterSecondMotion();
 
     };
 
