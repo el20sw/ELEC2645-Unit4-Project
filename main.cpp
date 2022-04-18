@@ -24,9 +24,8 @@ int main(){
 }
 
 void PasscodeInitialisation() {
-
+        
     lockbox.AccessManagerInit();
     ThisThread::sleep_for(2s);
     lockbox.ShowPasscode();
-
 }

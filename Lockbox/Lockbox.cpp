@@ -9,7 +9,7 @@ Lockbox::Lockbox(PinName fsrPin, PinName buzzerPin, PinName tmpPin)
         //Create Access Manager and initialise
         //access_manager = new AccessManager();
         access_manager = new AccessManager(screen);
-        //access_manager -> SetPasscode();
+        //access_manager -> AccessManagerInit();
     }
 
 void Lockbox::PlayForceAlarm(){
