@@ -44,6 +44,15 @@ class ScreenController {
         //Passcode Set Affirmative
         void PasscodeSetAffirmative();
 
+        //LCD displays enter Passcode
+        void RequestPasscode();
+
+        //Correct passcode message
+        void CorrectPasscodeMessage();
+        
+        //Incorrect passcode message
+        void IncorrectPasscodeMessage();
+
     private:
         //LCD (N5110) Object
         N5110 *_lcd;
