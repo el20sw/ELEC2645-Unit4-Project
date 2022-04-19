@@ -26,7 +26,11 @@ class Lockbox {
         void AccessManagerInit();
         //Method to show passcode
         void ShowPasscode();
-        //change
+
+
+        //state of lockbox - 1 = locked, 0 = unlocked
+        int state;
+        int *state_ptr = &state;
 
     private:
         //Screen Controller object - as pointer

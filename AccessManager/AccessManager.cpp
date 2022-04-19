@@ -136,3 +136,8 @@ Direction AccessManager::_EnterSecondMotion() {
 
     return d;
 }
+
+bool AccessManager::isLocked(int state) {
+    if (state) return true;
+    else return false;
+}
