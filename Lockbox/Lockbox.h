@@ -7,7 +7,7 @@
 #define LOCKBOX_H
 
 #include "mbed.h"
-//#include "AccessManager.h"
+#include "AccessManager.h"
 #include "ScreenController.h"
 #include "ForceSensor.h"
 #include "Alarm.h"
@@ -18,10 +18,21 @@ class Lockbox {
     public:
         //constructor
         Lockbox(PinName fsrPin, PinName buzzerPin, PinName tmpPin);
+        
+        //methods
+        //Sounds single note when FSR exceeds 60%
+        void PlayForceAlarm();
+        //Initialise Access Manager
+        void AccessManagerInit();
+        //Method to show passcode
+        void ShowPasscode();
 
 
-        //move to private?
+        //state of lockbox - 1 = locked, 0 = unlocked
+        int state;
+        int *state_ptr = &state;
 
+    private:
         //Screen Controller object - as pointer
         ScreenController *screen;
         //Force Sensor object - as object
@@ -31,18 +42,8 @@ class Lockbox {
         //Temperature Sensor object - as object
         TempSensor temp_sensor;
         //Access Manager object
-        //AccessManager *access_manager;
-
-        //methods
-        //Sounds single note when FSR exceeds 60%
-        void PlayForceAlarm();
-
-        //void ShowPasscode();
+        AccessManager *access_manager;
 
 };
-
-
-
-
 
 #endif

@@ -38,16 +38,33 @@ void ScreenController::dispLocked() {
 }
 
 void ScreenController::RequestFirstMotion() {
-    _lcd -> printString("Set First Motion:", 1, 1);
+    _lcd -> printString("Enter First", 0, 1);
+    _lcd -> printString("Motion:", 0, 2);
     _lcd -> refresh();
 }
 
 void ScreenController::RequestSecondMotion() {
-    _lcd -> printString("Set Second Motion:", 1, 1);
+    _lcd -> printString("Enter Second", 0, 1);
+    _lcd -> printString("Motion:", 0, 2);
     _lcd -> refresh();
 }
 
-void ScreenController::PasswordSetAffirmative() {
-    _lcd -> printString("Password Set", 1, 1);
+void ScreenController::PasscodeSetAffirmative() {
+    _lcd -> printString("Passcode Set", 1, 1);
+    _lcd -> refresh();
+}
+
+void ScreenController::RequestPasscode() {
+    _lcd -> printString("Enter Passcode", 0, 1);
+    _lcd -> refresh();
+}
+
+void ScreenController::CorrectPasscodeMessage() {
+    _lcd -> printString("Passcode Correct!", 0, 0);
+    _lcd -> refresh();
+}
+
+void ScreenController::IncorrectPasscodeMessage() {
+    _lcd -> printString("Passcode Incorrect!", 0, 0);
     _lcd -> refresh();
 }

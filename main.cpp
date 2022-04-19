@@ -9,11 +9,23 @@ BufferedSerial pc(USBTX, USBRX, 115200);
 //              FSR  Buzzer  Temp
 Lockbox lockbox(PA_1, PA_15, PC_5);
 
+//Function Declaration
+void PasscodeInitialisation();
 
 int main(){
+    //Initialisation
+    PasscodeInitialisation();
+    
     while (1) {
         
         lockbox.PlayForceAlarm();
         
     }
+}
+
+void PasscodeInitialisation() {
+        
+    lockbox.AccessManagerInit();
+    ThisThread::sleep_for(2s);
+    lockbox.ShowPasscode();
 }
