@@ -3,7 +3,7 @@
 
 //Constructor
 Lockbox::Lockbox(PinName fsrPin, PinName buzzerPin, PinName tmpPin) 
-    : force_sensor(fsrPin), alarm(buzzerPin), temp_sensor(tmpPin) {
+    : force_sensor(fsrPin), alarm(buzzerPin), temp_sensor(tmpPin) /*, state_ticker()*/ {
         //Create Screen Controller and initialise
         screen = new ScreenController();
         screen -> customInit();
@@ -12,8 +12,7 @@ Lockbox::Lockbox(PinName fsrPin, PinName buzzerPin, PinName tmpPin)
         //access_manager = new AccessManager();
         access_manager = new AccessManager(screen, state_ptr);
         AccessManagerInit();
-    }
-
+}
 
 // **********************************************************************
 // Access Manager Related Methods
@@ -24,6 +23,8 @@ void Lockbox::AccessManagerInit() {
 
 void Lockbox::LockboxStateChange() {
     if (access_manager -> EnterPasscode()) _state = 1;
+    ThisThread::sleep_for(1s);
+    screen -> clearLCD();
 }
 
 void Lockbox::ShowPasscode() {
@@ -39,8 +40,38 @@ void Lockbox::PrintState(int state) {
     }
 }
 
-int Lockbox::GetState() {return _state;}
+int Lockbox::GetState() {
+    return _state;
+}
 
+/*
+void Lockbox::StateTickerISR() {
+    if(_state != old_state) {
+        g_change_state_flag = 1;
+        old_state = _state;
+    }
+}
+
+void Lockbox::DisplayState() {
+    state_ticker.attach(&Lockbox::StateTickerISR, 1s);
+
+    if (g_change_state_flag) {
+        g_change_state_flag = 0;
+
+        switch (_state) {
+            case 0:
+                screen -> clearLCD();
+                ThisThread::sleep_for(100ms);
+                screen -> dispLocked();
+            case 1:
+                screen -> clearLCD();
+                ThisThread::sleep_for(100ms);
+                screen -> dispUnlocked();
+            
+        }
+    }
+}
+*/
 
 // **********************************************************************
 // Force Sensor Related Methods

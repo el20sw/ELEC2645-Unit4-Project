@@ -19,6 +19,9 @@ class Lockbox {
         //constructor
         Lockbox(PinName fsrPin, PinName buzzerPin, PinName tmpPin);
         
+        //variables
+        int g_change_state_flag = 0;
+
         //methods
 
         /* Access Manager */
@@ -32,6 +35,8 @@ class Lockbox {
             void PrintState(int state);
             //Method to get state
             int GetState();
+            //Method to display state on Screen
+            void DisplayState();
 
         //Sounds single note when FSR exceeds 60%
         void PlayForceAlarm();
@@ -50,9 +55,14 @@ class Lockbox {
 
         //variable describing the state of the lockbox - 0 = locked, 1 = unlocked
         int _state = 1;  //starts unlocked
+        int old_state = 1; //keeps track of last state
         //pointer to the state of the lockbox
         int *state_ptr = &_state;
 
+        //ticker to poll state
+        LowPowerTicker state_ticker;
+        //method to change state flag
+        void StateTickerISR();
 };
 
 #endif
