@@ -41,8 +41,17 @@ class ScreenController {
         //LCD Displays Set 2nd Passcode action
         void RequestSecondMotion();
 
-        //Password Set Affirmative
-        void PasswordSetAffirmative();
+        //Passcode Set Affirmative
+        void PasscodeSetAffirmative();
+
+        //LCD displays enter Passcode
+        void RequestPasscode();
+
+        //Correct passcode message
+        void CorrectPasscodeMessage();
+        
+        //Incorrect passcode message
+        void IncorrectPasscodeMessage();
 
     private:
         //LCD (N5110) Object

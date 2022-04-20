@@ -18,10 +18,30 @@ class Lockbox {
     public:
         //constructor
         Lockbox(PinName fsrPin, PinName buzzerPin, PinName tmpPin);
+        
+        //variables
+        int g_change_state_flag = 0;
 
+        //methods
 
-        //move to private?
+        /* Access Manager */
+            //Initialise Access Manager
+            void AccessManagerInit();
+            //Get a password input and unlock if true
+            void LockboxStateChange();
+            //Method to show passcode
+            void ShowPasscode();
+            //Method to print the current state - locked or unlocked
+            void PrintState(int state);
+            //Method to get state
+            int GetState();
+            //Method to display state on Screen
+            void DisplayState();
 
+        //Sounds single note when FSR exceeds 60%
+        void PlayForceAlarm();
+        
+    private:
         //Screen Controller object - as pointer
         ScreenController *screen;
         //Force Sensor object - as object
@@ -39,10 +59,18 @@ class Lockbox {
 
         void ShowPasscode();
 
+        //variable describing the state of the lockbox - 0 = locked, 1 = unlocked
+        int _state = 1;  //starts unlocked
+        //int old_state = 1; //keeps track of last state - redundant
+        //pointer to the state of the lockbox
+        int *state_ptr = &_state;
+
+        /*
+        //ticker to poll state
+        LowPowerTicker state_ticker;
+        //method to change state flag
+        void StateTickerISR();
+        */
 };
-
-
-
-
 
 #endif
