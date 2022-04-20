@@ -37,6 +37,11 @@ void ScreenController::dispLocked() {
     _lcd -> refresh();
 }
 
+void ScreenController::dispUnlocked() {
+    _lcd -> printString(" Unlocked ", 5, 3);
+    _lcd -> refresh();
+}
+
 void ScreenController::RequestFirstMotion() {
     _lcd -> printString("Enter First", 0, 1);
     _lcd -> printString("Motion:", 0, 2);
