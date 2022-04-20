@@ -20,18 +20,22 @@ class Lockbox {
         Lockbox(PinName fsrPin, PinName buzzerPin, PinName tmpPin);
         
         //methods
+
+        /* Access Manager */
+            //Initialise Access Manager
+            void AccessManagerInit();
+            //Get a password input and unlock if true
+            void LockboxStateChange();
+            //Method to show passcode
+            void ShowPasscode();
+            //Method to print the current state - locked or unlocked
+            void PrintState(int state);
+            //Method to get state
+            int GetState();
+
         //Sounds single note when FSR exceeds 60%
         void PlayForceAlarm();
-        //Initialise Access Manager
-        void AccessManagerInit();
-        //Method to show passcode
-        void ShowPasscode();
-
-
-        //state of lockbox - 1 = locked, 0 = unlocked
-        int state;
-        int *state_ptr = &state;
-
+        
     private:
         //Screen Controller object - as pointer
         ScreenController *screen;
@@ -43,6 +47,11 @@ class Lockbox {
         TempSensor temp_sensor;
         //Access Manager object
         AccessManager *access_manager;
+
+        //variable describing the state of the lockbox - 0 = locked, 1 = unlocked
+        int _state = 1;  //starts unlocked
+        //pointer to the state of the lockbox
+        int *state_ptr = &_state;
 
 };
 

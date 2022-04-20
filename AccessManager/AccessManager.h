@@ -1,5 +1,5 @@
 /* Access Manager Class
-*   High level interface with joystick and lcd to set a passcode or unlock
+*   Interface with joystick and lcd to set a passcode or unlock
 */
 
 
@@ -22,7 +22,7 @@ class AccessManager {
     public:
         //constructor
         AccessManager();
-        AccessManager(ScreenController *screen);
+        AccessManager(ScreenController *screen, int *_state_ptr);
         //destructor
         ~AccessManager();
 
@@ -31,11 +31,8 @@ class AccessManager {
         void SetPasscode();
         //method to print the passcode
         void PrintPasscode();
-        //method to enter a passcode
-        void EnterPasscode();
-        //method to get state of lockbox
-        bool isLocked(int state);
-
+        //method to enter a passcode returns 0 for locked, 1 for unlocked
+        int EnterPasscode();
 
     private:
         //Joystick Object
@@ -47,12 +44,17 @@ class AccessManager {
         //Screen Controller Object
         ScreenController *_lockScreen;
 
+        //state of the lockbox
+        int _state;
+
         //method to check if joystick is centered
         bool isCenter();
         //method to enter first motion
         Direction _EnterFirstMotion();
         //method to enter second motion
         Direction _EnterSecondMotion();
+        //method to check passcode stored against passcode entered
+        bool PasscodeCheck();
 
 };
 
