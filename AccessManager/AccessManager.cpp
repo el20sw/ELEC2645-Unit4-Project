@@ -86,7 +86,7 @@ void AccessManager::PrintPasscode() {
     printf("\n");
 }
 
-int AccessManager::EnterPasscode() {
+bool AccessManager::EnterPasscode() {
     _lockScreen -> clearLCD();
     ThisThread::sleep_for(100ms);
     _lockScreen -> RequestPasscode();
@@ -106,14 +106,14 @@ int AccessManager::EnterPasscode() {
         _lockScreen -> clearLCD();
         ThisThread::sleep_for(100ms);
         _lockScreen -> CorrectPasscodeMessage();
-        return 1;
+        return true;
 
     } else {
         //remain locked
         _lockScreen -> clearLCD();
         ThisThread::sleep_for(100ms);
         _lockScreen -> IncorrectPasscodeMessage();
-        return 0;
+        return false;
     }
 
 }
