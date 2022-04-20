@@ -11,11 +11,6 @@ Lockbox lockbox(PA_1, PA_15, PC_5);
 void PasscodeInitialisation();
 
 int main(){
-
-    lockbox.ShowPasscode();
-
-    while (1) {
-
     //Initialisation
     PasscodeInitialisation();
 

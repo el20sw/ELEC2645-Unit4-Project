@@ -53,12 +53,6 @@ class Lockbox {
         //Access Manager object
         AccessManager *access_manager;
 
-        //methods
-        //Sounds single note when FSR exceeds 60%
-        void PlayForceAlarm();
-
-        void ShowPasscode();
-
         //variable describing the state of the lockbox - 0 = locked, 1 = unlocked
         int _state = 1;  //starts unlocked
         //int old_state = 1; //keeps track of last state - redundant

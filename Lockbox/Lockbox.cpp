@@ -9,8 +9,6 @@ Lockbox::Lockbox(PinName fsrPin, PinName buzzerPin, PinName tmpPin)
         screen -> customInit();
 
         //Create Access Manager and initialise
-        access_manager = new AccessManager();
-        access_manager -> SetPasscode();
         //access_manager = new AccessManager();
         access_manager = new AccessManager(screen, state_ptr);
         AccessManagerInit();
@@ -93,9 +91,5 @@ void Lockbox::PlayForceAlarm(){
     }
     
     ThisThread::sleep_for(100ms);
-}
-
-
-void Lockbox::ShowPasscode() {
-    access_manager -> PrintPasscode();
+    
 }
