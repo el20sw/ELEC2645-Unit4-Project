@@ -55,14 +55,16 @@ class Lockbox {
 
         //variable describing the state of the lockbox - 0 = locked, 1 = unlocked
         int _state = 1;  //starts unlocked
-        int old_state = 1; //keeps track of last state
+        //int old_state = 1; //keeps track of last state - redundant
         //pointer to the state of the lockbox
         int *state_ptr = &_state;
 
+        /*
         //ticker to poll state
         LowPowerTicker state_ticker;
         //method to change state flag
         void StateTickerISR();
+        */
 };
 
 #endif
