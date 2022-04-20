@@ -32,7 +32,7 @@ class AccessManager {
         //method to print the passcode
         void PrintPasscode();
         //method to enter a passcode returns 0 for locked, 1 for unlocked
-        int EnterPasscode();
+        bool EnterPasscode();
 
     private:
         //Joystick Object
