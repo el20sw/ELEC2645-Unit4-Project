@@ -1,13 +1,15 @@
 #include "AccessManager.h"
 #include <cstdio>
 
-AccessManager::AccessManager(ScreenController *screen) : _passcode(), _input() {
+AccessManager::AccessManager(ScreenController *screen, int *_state_ptr) : _passcode(), _input() {
     //                         y     x
     _joystick = new Joystick(PC_3, PC_2);
     _joystick -> Joystick::init();
 
     //_lockScreen = new ScreenController();
     _lockScreen = screen;
+    //get state from state pointer
+    _state = *_state_ptr;
 }
 
 
@@ -33,6 +35,8 @@ void AccessManager::SetPasscode() {
     _lockScreen->clearLCD();
     ThisThread::sleep_for(100ms);
     _lockScreen->PasscodeSetAffirmative();
+    ThisThread::sleep_for(1s);
+    _lockScreen -> clearLCD();
 }
 
 bool AccessManager::isCenter() {
@@ -82,7 +86,7 @@ void AccessManager::PrintPasscode() {
     printf("\n");
 }
 
-void AccessManager::EnterPasscode() {
+int AccessManager::EnterPasscode() {
     _lockScreen -> clearLCD();
     ThisThread::sleep_for(100ms);
     _lockScreen -> RequestPasscode();
@@ -97,16 +101,19 @@ void AccessManager::EnterPasscode() {
 
     _input.movement2 = _EnterSecondMotion();
 
-    if (_input.movement1 == _passcode.movement1 && _input.movement2 == _passcode.movement2) {
+    if (PasscodeCheck()) {
         //set state to unlocked
         _lockScreen -> clearLCD();
         ThisThread::sleep_for(100ms);
         _lockScreen -> CorrectPasscodeMessage();
+        return 1;
+
     } else {
         //remain locked
         _lockScreen -> clearLCD();
         ThisThread::sleep_for(100ms);
         _lockScreen -> IncorrectPasscodeMessage();
+        return 0;
     }
 
 }
@@ -137,7 +144,7 @@ Direction AccessManager::_EnterSecondMotion() {
     return d;
 }
 
-bool AccessManager::isLocked(int state) {
-    if (state) return true;
+bool AccessManager::PasscodeCheck() {
+    if ((_input.movement1 == _passcode.movement1) && (_input.movement2 == _passcode.movement2)) return true;
     else return false;
 }
