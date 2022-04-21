@@ -10,7 +10,6 @@
 
 class ScreenController {
     public:
-        
 
         //constructor
         ScreenController();

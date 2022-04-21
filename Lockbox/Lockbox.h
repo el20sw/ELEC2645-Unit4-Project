@@ -8,6 +8,7 @@
 
 #include "mbed.h"
 #include "AccessManager.h"
+#include "LockUnlock.h"
 #include "ScreenController.h"
 #include "ForceSensor.h"
 #include "Alarm.h"
@@ -20,7 +21,8 @@ class Lockbox {
         Lockbox(PinName fsrPin, PinName buzzerPin, PinName tmpPin);
         
         //variables
-        int g_change_state_flag = 0;
+        //int g_change_state_flag = 0; //not used
+        volatile int g_LockUnlock_flag = 0;
 
         //methods
 
@@ -38,6 +40,10 @@ class Lockbox {
             //Method to display state on Screen
             void DisplayState();
 
+        /* LockUnlock ISR */
+            //Change flag to signal need to call functions
+            void LockUnlock_ISR();
+
         //Sounds single note when FSR exceeds 60%
         void PlayForceAlarm();
         
@@ -52,6 +58,8 @@ class Lockbox {
         TempSensor temp_sensor;
         //Access Manager object
         AccessManager *access_manager;
+        //LockUnlock object
+        LockUnlock *lock_button;
 
         //variable describing the state of the lockbox - 0 = locked, 1 = unlocked
         int _state = 1;  //starts unlocked

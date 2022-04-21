@@ -9,9 +9,12 @@ Lockbox::Lockbox(PinName fsrPin, PinName buzzerPin, PinName tmpPin)
         screen -> customInit();
 
         //Create Access Manager and initialise
-        //access_manager = new AccessManager();
         access_manager = new AccessManager(screen, state_ptr);
         AccessManagerInit();
+
+        //Create LockUnlock object for interupt
+        lock_button = new LockUnlock(PA_13);
+        lock_button -> rise(&Lockbox::LockUnlock_ISR);
 }
 
 // **********************************************************************
@@ -73,10 +76,29 @@ void Lockbox::DisplayState() {
 }
 */
 
+void Lockbox::DisplayState() {
+    //if state=1 then unlocked else state=0 therefore locked
+    switch (_state) {
+        case 0:
+            screen -> clearLCD();
+            ThisThread::sleep_for(100ms);
+            screen -> dispLocked();
+        case 1:
+            screen -> clearLCD();
+            ThisThread::sleep_for(100ms);
+            screen -> dispUnlocked();
+    }
+}
+
+// **********************************************************************
+// Lock Unlock Interrupt Methods
+void Lockbox::LockUnlock_ISR() {
+    g_LockUnlock_flag = 1;
+}
+
 // **********************************************************************
 // Force Sensor Related Methods
-void Lockbox::PlayForceAlarm(){
-    
+void Lockbox::PlayForceAlarm() {
     force_sensor.ReadFSR();
     force_sensor.PrintForceValue();
 
@@ -90,6 +112,5 @@ void Lockbox::PlayForceAlarm(){
         screen -> clearLCD();
     }
     
-    ThisThread::sleep_for(100ms);
-    
+    ThisThread::sleep_for(100ms);  
 }

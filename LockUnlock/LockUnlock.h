@@ -7,7 +7,7 @@
 
 #include "mbed.h"
 
-class LockUnlock {
+class LockUnlock : public InterruptIn {
     public:
         //constructor
         LockUnlock(PinName InterruptPin);
