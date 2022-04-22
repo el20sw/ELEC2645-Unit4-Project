@@ -35,11 +35,7 @@ class Lockbox {
             //Get a password input and unlock if true
             bool LockboxStateChange();            
             //Method to get state
-            int GetState();
-            //Method to display state on Screen
-            void DisplayState();
-
-        
+            int GetState();        
 
         //Sounds single note when FSR exceeds 60%
         void PlayForceAlarm();

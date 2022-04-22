@@ -66,49 +66,6 @@ int Lockbox::GetState() {
     return _state;
 }
 
-/*
-void Lockbox::StateTickerISR() {
-    if(_state != old_state) {
-        g_change_state_flag = 1;
-        old_state = _state;
-    }
-}
-
-void Lockbox::DisplayState() {
-    state_ticker.attach(&Lockbox::StateTickerISR, 1s);
-
-    if (g_change_state_flag) {
-        g_change_state_flag = 0;
-
-        switch (_state) {
-            case 0:
-                screen -> clearLCD();
-                ThisThread::sleep_for(100ms);
-                screen -> dispLocked();
-            case 1:
-                screen -> clearLCD();
-                ThisThread::sleep_for(100ms);
-                screen -> dispUnlocked();
-            
-        }
-    }
-}
-*/
-
-void Lockbox::DisplayState() {
-    //if state=1 then unlocked else state=0 therefore locked
-    switch (_state) {
-        case 0:
-            screen -> clearLCD();
-            ThisThread::sleep_for(100ms);
-            screen -> dispLocked();
-        case 1:
-            screen -> clearLCD();
-            ThisThread::sleep_for(100ms);
-            screen -> dispUnlocked();
-    }
-}
-
 // **********************************************************************
 // Lock Unlock Interrupt Methods
 void Lockbox::LockUnlockISR(volatile int state) {
@@ -149,3 +106,32 @@ void Lockbox::PrintState(int state) {
 void Lockbox::ShowPasscode() {
     access_manager -> PrintPasscode();
 }
+
+/*
+void Lockbox::StateTickerISR() {
+    if(_state != old_state) {
+        g_change_state_flag = 1;
+        old_state = _state;
+    }
+}
+
+void Lockbox::DisplayState() {
+    state_ticker.attach(&Lockbox::StateTickerISR, 1s);
+
+    if (g_change_state_flag) {
+        g_change_state_flag = 0;
+
+        switch (_state) {
+            case 0:
+                screen -> clearLCD();
+                ThisThread::sleep_for(100ms);
+                screen -> dispLocked();
+            case 1:
+                screen -> clearLCD();
+                ThisThread::sleep_for(100ms);
+                screen -> dispUnlocked();
+            
+        }
+    }
+}
+*/
