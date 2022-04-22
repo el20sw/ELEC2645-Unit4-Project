@@ -7,6 +7,7 @@
 #define LOCKBOX_H
 
 #include "mbed.h"
+#include <cstdio>
 #include "AccessManager.h"
 #include "LockUnlock.h"
 #include "ScreenController.h"
@@ -29,6 +30,8 @@ class Lockbox {
         /* Access Manager */
             //Initialise Access Manager
             void AccessManagerInit();
+            //Begin routine to either lock of unlock
+            void LockboxLockUnlock();
             //Get a password input and unlock if true
             void LockboxStateChange();
             //Method to show passcode
@@ -40,9 +43,7 @@ class Lockbox {
             //Method to display state on Screen
             void DisplayState();
 
-        /* LockUnlock ISR */
-            //Change flag to signal need to call functions
-            void LockUnlock_ISR();
+        
 
         //Sounds single note when FSR exceeds 60%
         void PlayForceAlarm();
@@ -62,10 +63,14 @@ class Lockbox {
         LockUnlock *lock_button;
 
         //variable describing the state of the lockbox - 0 = locked, 1 = unlocked
-        int _state = 1;  //starts unlocked
+        volatile int _state = 1;  //starts unlocked
         //int old_state = 1; //keeps track of last state - redundant
         //pointer to the state of the lockbox
-        int *state_ptr = &_state;
+        volatile int *state_ptr = &_state;
+
+        /* LockUnlock ISR */
+            //Change flag to signal need to call functions
+            void LockUnlockISR(volatile int state);
 
         /*
         //ticker to poll state

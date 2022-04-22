@@ -2,6 +2,7 @@
 
 #include "mbed.h"
 #include "Lockbox.h"
+#include <cstdio>
 
 BufferedSerial pc(USBTX, USBRX, 115200);
 //              FSR  Buzzer  Temp
@@ -17,11 +18,16 @@ int main(){
     //Print state
     lockbox.PrintState(lockbox.GetState());
 
-    //Enter a passcode and unlock
-    ThisThread::sleep_for(1s);
-    lockbox.LockboxStateChange();
-    //Print state
-    lockbox.PrintState(lockbox.GetState());
+    while (true) {
+        //Enter a passcode and unlock
+        ThisThread::sleep_for(1s);
+        lockbox.LockboxLockUnlock();
+        //Print state
+        lockbox.PrintState(lockbox.GetState());
+
+        sleep();
+    
+    }
     
     /*
     while (1) {

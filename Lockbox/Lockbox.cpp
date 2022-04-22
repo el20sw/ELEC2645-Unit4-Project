@@ -9,12 +9,11 @@ Lockbox::Lockbox(PinName fsrPin, PinName buzzerPin, PinName tmpPin)
         screen -> customInit();
 
         //Create Access Manager and initialise
-        access_manager = new AccessManager(screen, state_ptr);
+        access_manager = new AccessManager(screen);
         AccessManagerInit();
 
         //Create LockUnlock object for interupt
-        lock_button = new LockUnlock(PA_13);
-        lock_button -> rise(&Lockbox::LockUnlock_ISR);
+        lock_button = new LockUnlock(PC_10);
 }
 
 // **********************************************************************
@@ -24,9 +23,29 @@ void Lockbox::AccessManagerInit() {
     _state = 0;
 }
 
+void Lockbox::LockboxLockUnlock() {
+    if (lock_button -> getISRflag()) {
+        //set flag back to zero
+        lock_button -> setISRflag(0);
+
+        if (_state) {
+            //Lock the lockbox and display locked on lcd
+            _state = 0;
+            screen -> clearLCD();
+            ThisThread::sleep_for(100ms);
+            screen -> dispLocked();
+        } else {
+            //Begin unlock procedure and then display unlocked on lcd
+            LockboxStateChange();
+            ThisThread::sleep_for(100ms);
+            screen -> dispUnlocked();
+        }
+    }
+}
+
 void Lockbox::LockboxStateChange() {
     if (access_manager -> EnterPasscode()) _state = 1;
-    ThisThread::sleep_for(1s);
+    ThisThread::sleep_for(2s);
     screen -> clearLCD();
 }
 
@@ -92,8 +111,8 @@ void Lockbox::DisplayState() {
 
 // **********************************************************************
 // Lock Unlock Interrupt Methods
-void Lockbox::LockUnlock_ISR() {
-    g_LockUnlock_flag = 1;
+void Lockbox::LockUnlockISR(volatile int state) {
+    
 }
 
 // **********************************************************************
