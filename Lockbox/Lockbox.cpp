@@ -4,7 +4,7 @@
 // **********************************************************************
 //Constructor
 Lockbox::Lockbox(PinName fsrPin, PinName buzzerPin, PinName tmpPin) 
-    : force_sensor(fsrPin), alarm(buzzerPin), temp_sensor(tmpPin) /*, state_ticker()*/ {
+    : force_sensor(fsrPin), alarm(buzzerPin), temp_sensor(tmpPin) {
         //Create Screen Controller and initialise
         screen = new ScreenController();
         screen->customInit();
@@ -13,7 +13,11 @@ Lockbox::Lockbox(PinName fsrPin, PinName buzzerPin, PinName tmpPin)
         AccessManagerInit();
         //Create LockUnlock object for interupt
         lock_button = new LockUnlock(PC_10);
+        //Create Indicator LEDs object
+        flashingLEDs = new IndicatorLED(PA_13, PA_14);
 }
+
+
 
 // **********************************************************************
 // Access Manager Related Methods

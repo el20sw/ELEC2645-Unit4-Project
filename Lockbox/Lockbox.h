@@ -14,6 +14,7 @@
 #include "ForceSensor.h"
 #include "Alarm.h"
 #include "TempSensor.h"
+#include "IndicatorLED.h"
 
 class Lockbox {
     
@@ -23,6 +24,9 @@ class Lockbox {
         Lockbox(PinName fsrPin, PinName buzzerPin, PinName tmpPin);
 
     //Methods
+    /* Lockbox Runtime Methods */
+        
+
     /* Access Manager */
         //Initialise Access Manager
         void AccessManagerInit();
@@ -58,6 +62,8 @@ class Lockbox {
         AccessManager *access_manager;
         //LockUnlock object
         LockUnlock *lock_button;
+        //IndicatorLED object
+        IndicatorLED *flashingLEDs;
     
     //Variables
         //variable describing the state of the lockbox - 0 = locked, 1 = unlocked
