@@ -19,22 +19,19 @@
 
 class Alarm {
     public:
-        //constructors
+    //Constructors
         Alarm(PinName buzzerPin);
-        //destructor
+    //Destructor
         //~Alarm(); redundant when using direct initialisation
-        //mutators
+    //Methods
+        //Method to play a single note
         void PlayNote(int frequency);
-            //Method to play a single note
+        //Method to set the pulsewidth of the signal
         void SetPulse_us(int pulse_us);
-            //Method to set the pulsewidth of the signal
-        //accessors
-        //nothing here for now
 
     private:
+    //Objects
         PwmOut _alarmPin;
-
-        //friend class Lockbox;
 
 };
 

@@ -10,28 +10,31 @@
 
 class ForceSensor {
     public:
-        //constructors
+    //Constructors
         ForceSensor(PinName fsrPin);
-        //destructors
+    //Destructors
         ~ForceSensor();
+    //Methods
         //mutators
+        // Reads from the assigned pin and assigns to a variable
         void ReadFSR();
-            // Reads from the assigned pin and assigns to a variable
+        //method to set threshold FSR - currently redundant
         void SetThresholdFSR(float MaxForceValue);       
-            //method to set threshold FSR - currently redundant
+            
         //accessors
+        //returns FSR sensor data as float
         float GetForceValue();                         
-            //returns FSR sensor data as float
-        void PrintForceValue();                              
-             //method to print FSR data to monitor as percentage
+        //method to print FSR data to monitor as percentage   
+        void PrintForceValue();                                  
 
     private:
+    //Objects
         AnalogIn *_inputPin;
 
+    //Variables
         float _ForceValue;
         float _MaxForceValue;
 
-        //friend class Lockbox;
 };
 
 #endif
