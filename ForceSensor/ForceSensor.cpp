@@ -1,11 +1,11 @@
 #include "ForceSensor.h"
 
-//constructors
+//Constructors
 ForceSensor::ForceSensor(PinName fsrPin){
     _inputPin = new AnalogIn(fsrPin);
 }
 
-//destructors
+//Destructors
 ForceSensor::~ForceSensor(){
     delete _inputPin;
 }

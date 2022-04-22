@@ -12,9 +12,7 @@ Alarm::~Alarm(){
 
 void Alarm::PlayNote(int frequency){
     _alarmPin.period_us((float) 1000000.0f/ (float) frequency);
-    //_alarmPin -> period_us((float) 1000000.0f/ (float) frequency);
     _alarmPin.pulsewidth_us((_alarmPin.read_period_us())/2);
-    //_alarmPin -> pulsewidth_us((_alarmPin -> read_period_us())/2);
     ThisThread::sleep_for(500ms);
 }
 
