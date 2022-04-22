@@ -21,8 +21,8 @@ struct Passcode {
 class AccessManager {
     public:
         //constructor
+        AccessManager(ScreenController *screen);
         AccessManager();
-        AccessManager(ScreenController *screen, int *_state_ptr);
         //destructor
         ~AccessManager();
 
@@ -43,9 +43,6 @@ class AccessManager {
         Passcode _input;
         //Screen Controller Object
         ScreenController *_lockScreen;
-
-        //state of the lockbox
-        int _state;
 
         //method to check if joystick is centered
         bool isCenter();

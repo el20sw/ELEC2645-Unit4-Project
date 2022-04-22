@@ -1,15 +1,13 @@
 #include "AccessManager.h"
 #include <cstdio>
 
-AccessManager::AccessManager(ScreenController *screen, int *_state_ptr) : _passcode(), _input() {
+AccessManager::AccessManager(ScreenController *screen) : _passcode(), _input() {
     //                         y     x
     _joystick = new Joystick(PC_3, PC_2);
     _joystick -> Joystick::init();
 
     //_lockScreen = new ScreenController();
     _lockScreen = screen;
-    //get state from state pointer
-    _state = *_state_ptr;
 }
 
 
