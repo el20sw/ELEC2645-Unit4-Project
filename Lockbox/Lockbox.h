@@ -33,11 +33,7 @@ class Lockbox {
             //Begin routine to either lock of unlock
             void LockboxLockUnlock();
             //Get a password input and unlock if true
-            void LockboxStateChange();
-            //Method to show passcode
-            void ShowPasscode();
-            //Method to print the current state - locked or unlocked
-            void PrintState(int state);
+            bool LockboxStateChange();            
             //Method to get state
             int GetState();
             //Method to display state on Screen
@@ -47,6 +43,12 @@ class Lockbox {
 
         //Sounds single note when FSR exceeds 60%
         void PlayForceAlarm();
+
+        //Debugging Methods
+            //Method to print the current state - locked or unlocked
+            void PrintState(int state);
+            //Method to show passcode
+            void ShowPasscode();
         
     private:
         //Screen Controller object - as pointer

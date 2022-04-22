@@ -37,29 +37,28 @@ void Lockbox::LockboxLockUnlock() {
             screen -> dispLocked();
         } else {
             //Begin unlock procedure and then display unlocked on lcd
-            LockboxStateChange();
-            ThisThread::sleep_for(100ms);
-            screen -> dispUnlocked();
+            if (LockboxStateChange()) {
+                ThisThread::sleep_for(100ms);
+                screen -> dispUnlocked();
+            } else {
+                ThisThread::sleep_for(100ms);
+                screen -> dispLocked();
+            }
         }
     }
 }
 
-void Lockbox::LockboxStateChange() {
-    if (access_manager -> EnterPasscode()) _state = 1;
+bool Lockbox::LockboxStateChange() {
+    bool PasscodeState = access_manager -> EnterPasscode();
     ThisThread::sleep_for(2s);
     screen -> clearLCD();
-}
 
-void Lockbox::ShowPasscode() {
-    access_manager -> PrintPasscode();
-}
-
-void Lockbox::PrintState(int state) {
-    switch (state) {
-        case 0:
-            printf("\nLocked");
-        case 1:
-            printf("\nUnlocked");
+    if (PasscodeState) {
+        _state = 1;
+        return true;
+    } else {
+        _state = 0;
+        return false;
     }
 }
 
@@ -133,4 +132,20 @@ void Lockbox::PlayForceAlarm() {
     }
     
     ThisThread::sleep_for(100ms);  
+}
+
+// **********************************************************************
+//Debugging Methods
+
+void Lockbox::PrintState(int state) {
+    switch (state) {
+        case 0:
+            printf("\nLocked");
+        case 1:
+            printf("\nUnlocked");
+    }
+}
+
+void Lockbox::ShowPasscode() {
+    access_manager -> PrintPasscode();
 }
