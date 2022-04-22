@@ -7,10 +7,14 @@
 
 #include "mbed.h"
 
-class LockUnlock : public InterruptIn {
+class LockUnlock {
     public:
         //constructor
         LockUnlock(PinName InterruptPin);
+        //methods
+        void LockUnlockISR() { LockUnlockISR_flag = 1; }
+        //variables
+        volatile int LockUnlockISR_flag = 0;
 
     private:
         InterruptIn *_LockUnlockPin;
