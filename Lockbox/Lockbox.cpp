@@ -21,6 +21,7 @@ Lockbox::Lockbox(PinName fsrPin, PinName buzzerPin, PinName tmpPin)
 void Lockbox::AccessManagerInit() {
     access_manager -> SetPasscode();
     _state = 0;
+    screen -> dispLocked();
 }
 
 void Lockbox::LockboxLockUnlock() {
