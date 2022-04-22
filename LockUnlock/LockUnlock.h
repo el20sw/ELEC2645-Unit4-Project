@@ -12,12 +12,15 @@ class LockUnlock {
         //constructor
         LockUnlock(PinName InterruptPin);
         //methods
-        void LockUnlockISR() { LockUnlockISR_flag = 1; }
-        //variables
-        volatile int LockUnlockISR_flag = 0;
+        void LockUnlockISR() { _LockUnlockISR_flag = 1; }
+        volatile int getISRflag() { return _LockUnlockISR_flag; }
+        void setISRflag(int val) { _LockUnlockISR_flag = val; }
+        
 
     private:
         InterruptIn *_LockUnlockPin;
+        //variables
+        volatile int _LockUnlockISR_flag = 0;
 };
 
 #endif
