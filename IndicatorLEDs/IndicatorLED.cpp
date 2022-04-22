@@ -1,8 +1,8 @@
 #include "IndicatorLED.h"
 
-IndicatorLED::IndicatorLED(PinName ledRed, PinName ledGreen) : _ledFlasher(){
-    _lockedLED = new DigitalOut(ledRed);
+IndicatorLED::IndicatorLED(PinName ledGreen, PinName ledRed) : _ledFlasher(){
     _unlockedLED = new DigitalOut(ledGreen);
+    _lockedLED = new DigitalOut(ledRed);
     InitLED();
 }
 
@@ -11,26 +11,48 @@ void IndicatorLED::InitLED() {
     _unlockedLED -> write(0);
 }
 
-void IndicatorLED::FlashLocked() {
-    _lockedLED -> write(1);
-    ThisThread::sleep_for(500ms);
-    _lockedLED -> write(0);
+void IndicatorLED::AttachTicker() {
+    _ledFlasher.attach(callback(this, &IndicatorLED::ledFlagChange_ISR), 500ms);
 }
 
-/*
-void IndicatorLED::IndicateLocked() {
-    _ledFlasher.attach(&IndicatorLED::FlashLocked, 2.0s);
-}
-*/
-
-void IndicatorLED::FlashUnlocked() {
-    _unlockedLED -> write(1);
-    ThisThread::sleep_for(500ms);
-    _unlockedLED -> write(0);
+void IndicatorLED::DetachTicker() {
+    _ledFlasher.detach();
 }
 
-/*
-void IndicatorLED::IndicateLocked() {
-    _ledFlasher.attach(&IndicatorLED::FlashLocked, 2);
+void IndicatorLED::Blink(DigitalOut *led) {
+    //blink led
+    led->write(1);
+    ThisThread::sleep_for(200ms);
+    led->write(0);
 }
-*/
+
+void IndicatorLED::FlashLockedLED() {
+    //On flag change blink led
+    if (_ledIndicator_flag) {
+        //set led indicator flag to zero
+        _ledIndicator_flag = 0;
+        //blink led
+        Blink(_lockedLED); 
+    }
+}
+
+void IndicatorLED::FlashUnlockedLED() {
+    //On flag change blink led
+    if (_ledIndicator_flag) {
+        //set led indicator flag to zero
+        _ledIndicator_flag = 0;
+        //blink led
+        Blink(_unlockedLED);
+    }
+}
+
+void IndicatorLED::TickLED(int state) {
+    switch (state) {
+        case 0:
+            FlashLockedLED();
+            break;
+        case 1:
+            FlashUnlockedLED();
+            break;
+    }
+}

@@ -1,5 +1,5 @@
 /* Indicator LED class
-*   Interfaces with indicator leds as bus
+*  Interfaces with indicator leds
 */
 
 #ifndef INDICATOR_LED_H
@@ -9,34 +9,44 @@
 
 class IndicatorLED {
     public:
-        //constructor
+    //Constructor
         IndicatorLED(PinName ledRed, PinName ledGreen);
         IndicatorLED();
 
-        //destructor
+    //Destructor
         ~IndicatorLED();
 
-        //low power ticker object for periodic flashing
-        LowPowerTicker _ledFlasher;
+    //Methods
+        //change flag - ISR
+        void ledFlagChange_ISR() { _ledIndicator_flag = 1; }
+        //take the state as an input and attach to the relavent led
+        void TickLED(int state);
 
-        //methods
-        //intialise LEDs
-        void InitLED();
-        //indicate locked
-        void IndicateLocked();
-        //indicate unlocked
-        void IndicateUnlocked();
-        //indicate alarm
-        void IndicateAlarm();
-        //method to flash locked
-        void FlashLocked();
-        //method to flash unlocked
-        void FlashUnlocked();
 
     private:
+    //Objects
         //leds as digital objects
         DigitalOut *_lockedLED;
         DigitalOut *_unlockedLED;
+        //Ticker object for periodic flashing
+        Ticker _ledFlasher;
+
+    //Methods
+        //intialise LEDs
+        void InitLED();
+        //attach class object to ticker
+        void AttachTicker();
+        //detach led from ticker
+        void DetachTicker();
+        //blink given led
+        void Blink(DigitalOut *led);
+        //flash locked (red) led
+        void FlashLockedLED();
+        //flash unlocked (green) led
+        void FlashUnlockedLED();
+
+    //Variables
+        volatile int _ledIndicator_flag = 0;
 
         
 
