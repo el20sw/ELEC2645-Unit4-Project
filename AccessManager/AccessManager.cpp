@@ -4,9 +4,8 @@
 AccessManager::AccessManager(ScreenController *screen) : _passcode(), _input() {
     //                         y     x
     _joystick = new Joystick(PC_3, PC_2);
-    _joystick -> Joystick::init();
+    _joystick->Joystick::init();
 
-    //_lockScreen = new ScreenController();
     _lockScreen = screen;
 }
 
@@ -17,7 +16,6 @@ AccessManager::~AccessManager() {
 }
 
 void AccessManager::SetPasscode() {
-
     // store direction in passcode movement 1
     _passcode.movement1 = _EnterFirstMotion();
 
@@ -34,11 +32,11 @@ void AccessManager::SetPasscode() {
     ThisThread::sleep_for(100ms);
     _lockScreen->PasscodeSetAffirmative();
     ThisThread::sleep_for(1s);
-    _lockScreen -> clearLCD();
+    _lockScreen->clearLCD();
 }
 
 bool AccessManager::isCenter() {
-    if (_joystick -> get_direction() == CENTRE) return true;
+    if (_joystick->get_direction() == CENTRE) return true;
     else return false;
 }
 
@@ -85,9 +83,9 @@ void AccessManager::PrintPasscode() {
 }
 
 bool AccessManager::EnterPasscode() {
-    _lockScreen -> clearLCD();
+    _lockScreen->clearLCD();
     ThisThread::sleep_for(100ms);
-    _lockScreen -> RequestPasscode();
+    _lockScreen->RequestPasscode();
     ThisThread::sleep_for(500ms);
 
     _input.movement1 = _EnterFirstMotion();
@@ -101,16 +99,16 @@ bool AccessManager::EnterPasscode() {
 
     if (PasscodeCheck()) {
         //set state to unlocked
-        _lockScreen -> clearLCD();
+        _lockScreen->clearLCD();
         ThisThread::sleep_for(100ms);
-        _lockScreen -> CorrectPasscodeMessage();
+        _lockScreen->CorrectPasscodeMessage();
         return true;
 
     } else {
         //remain locked
-        _lockScreen -> clearLCD();
+        _lockScreen->clearLCD();
         ThisThread::sleep_for(100ms);
-        _lockScreen -> IncorrectPasscodeMessage();
+        _lockScreen->IncorrectPasscodeMessage();
         return false;
     }
 
@@ -119,11 +117,11 @@ bool AccessManager::EnterPasscode() {
 Direction AccessManager::_EnterFirstMotion() {
     Direction d;
     //check again for direction that isn't center
-    _lockScreen -> clearLCD();
+    _lockScreen->clearLCD();
     ThisThread::sleep_for(100ms);
-    _lockScreen -> RequestFirstMotion();
+    _lockScreen->RequestFirstMotion();
     do {
-        d = _joystick -> get_direction();
+        d = _joystick->get_direction();
     } while (d == CENTRE);
 
     return d;
@@ -132,11 +130,11 @@ Direction AccessManager::_EnterFirstMotion() {
 Direction AccessManager::_EnterSecondMotion() {
     Direction d;
     //check again for direction that isn't center
-    _lockScreen -> clearLCD();
+    _lockScreen->clearLCD();
     ThisThread::sleep_for(100ms);
-    _lockScreen -> RequestSecondMotion();
+    _lockScreen->RequestSecondMotion();
     do {
-        d = _joystick -> get_direction();
+        d = _joystick->get_direction();
     } while (d == CENTRE);
 
     return d;

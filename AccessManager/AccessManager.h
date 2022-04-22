@@ -20,13 +20,13 @@ struct Passcode {
 
 class AccessManager {
     public:
-        //constructor
+    //Constructor
         AccessManager(ScreenController *screen);
         AccessManager();
-        //destructor
+    //Destructor
         ~AccessManager();
 
-        //methods
+    //Methods
         //method to set a passcode
         void SetPasscode();
         //method to print the passcode
@@ -35,6 +35,7 @@ class AccessManager {
         bool EnterPasscode();
 
     private:
+    //Objects
         //Joystick Object
         Joystick *_joystick;
         //Stored Passcode Object
@@ -44,6 +45,7 @@ class AccessManager {
         //Screen Controller Object
         ScreenController *_lockScreen;
 
+    //Methods
         //method to check if joystick is centered
         bool isCenter();
         //method to enter first motion

@@ -1,5 +1,5 @@
 /* LockUnlock class - interfaces with physical interrupt to
-* begin unlcocking procedure or lock lockbox
+*  begin unlcocking procedure or lock lockbox
 */ 
 
 #ifndef LOCK_UNLOCK_H
@@ -9,17 +9,18 @@
 
 class LockUnlock {
     public:
-        //constructor
+    //Constructor
         LockUnlock(PinName InterruptPin);
-        //methods
+    //Methods
         void LockUnlockISR() { _LockUnlockISR_flag = 1; }
         volatile int getISRflag() { return _LockUnlockISR_flag; }
         void setISRflag(int val) { _LockUnlockISR_flag = val; }
         
 
     private:
+    //Objects
         InterruptIn *_LockUnlockPin;
-        //variables
+    //Variables
         volatile int _LockUnlockISR_flag = 0;
 };
 
