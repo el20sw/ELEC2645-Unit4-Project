@@ -29,7 +29,7 @@ class IndicatorLED {
         DigitalOut *_lockedLED;
         DigitalOut *_unlockedLED;
         //Ticker object for periodic flashing
-        Ticker _ledFlasher;
+        Ticker *_ledFlasher;
 
     //Methods
         //intialise LEDs

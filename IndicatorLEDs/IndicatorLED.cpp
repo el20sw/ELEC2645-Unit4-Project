@@ -1,28 +1,30 @@
 #include "IndicatorLED.h"
 
-IndicatorLED::IndicatorLED(PinName ledGreen, PinName ledRed) : _ledFlasher(){
+IndicatorLED::IndicatorLED(PinName ledGreen, PinName ledRed){
     _unlockedLED = new DigitalOut(ledGreen);
     _lockedLED = new DigitalOut(ledRed);
+    _ledFlasher = new Ticker();
     InitLED();
+    AttachTicker();
 }
 
 void IndicatorLED::InitLED() {
-    _lockedLED -> write(0);
-    _unlockedLED -> write(0);
+    _lockedLED->write(0);
+    _unlockedLED->write(0);
 }
 
 void IndicatorLED::AttachTicker() {
-    _ledFlasher.attach(callback(this, &IndicatorLED::ledFlagChange_ISR), 500ms);
+    _ledFlasher->attach(callback(this, &IndicatorLED::ledFlagChange_ISR), 3s);
 }
 
 void IndicatorLED::DetachTicker() {
-    _ledFlasher.detach();
+    _ledFlasher->detach();
 }
 
 void IndicatorLED::Blink(DigitalOut *led) {
     //blink led
     led->write(1);
-    ThisThread::sleep_for(200ms);
+    ThisThread::sleep_for(500ms);
     led->write(0);
 }
 
@@ -47,12 +49,6 @@ void IndicatorLED::FlashUnlockedLED() {
 }
 
 void IndicatorLED::TickLED(int state) {
-    switch (state) {
-        case 0:
-            FlashLockedLED();
-            break;
-        case 1:
-            FlashUnlockedLED();
-            break;
-    }
+    if (state) FlashUnlockedLED();
+    else FlashLockedLED();
 }
