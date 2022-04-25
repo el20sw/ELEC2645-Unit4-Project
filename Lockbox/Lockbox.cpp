@@ -88,12 +88,8 @@ void Lockbox::PlayForceAlarm() {
 // **********************************************************************
 //Debugging Methods
 void Lockbox::PrintState(int state) {
-    switch (state) {
-        case 0:
-            printf("\nLocked");
-        case 1:
-            printf("\nUnlocked");
-    }
+    if (state) printf("\nUnlocked");
+    else printf("\nLocked");
 }
 
 void Lockbox::ShowPasscode() {
