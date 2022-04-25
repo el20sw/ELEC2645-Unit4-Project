@@ -25,7 +25,11 @@ void Lockbox::Runtime() {
         flashingLEDs->TickLED(_state);
         //Enter a passcode and unlock
         LockboxLockUnlock();
+        //Print current state to console
+        PrintState(_state);
+        ThisThread::sleep_for(500ms);
 
+        //Sleep
         sleep();
     }
 }
@@ -43,16 +47,21 @@ void Lockbox::LockboxLockUnlock() {
         //set flag back to zero
         lock_button->setISRflag(0);
 
+        //If unlocked
         if (_state) {
             //Lock the lockbox and display locked on lcd
             _state = 0;
             screen->clearLCD();
             ThisThread::sleep_for(100ms);
             screen->dispLocked();
+        //Else if Locked
         } else {
             //Begin unlock procedure and then display unlocked on lcd
             LockboxStateChange();
         }
+    } else {
+        //If button not pressed go to sleep
+        sleep();
     }
 }
 
