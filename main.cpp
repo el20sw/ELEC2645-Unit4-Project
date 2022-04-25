@@ -18,22 +18,8 @@ int main(){
     //Print state
     lockbox.PrintState(lockbox.GetState());
 
-    while (true) {
-        //Enter a passcode and unlock
-        ThisThread::sleep_for(1s);
-        lockbox.LockboxLockUnlock();
-        //Print state
-        lockbox.PrintState(lockbox.GetState());
+    lockbox.Runtime();
 
-        sleep();
-    
-    }
-    
-    /*
-    while (1) {
-        lockbox.PlayForceAlarm();
-    }
-    */
 }
 
 void PasscodeInitialisation() {

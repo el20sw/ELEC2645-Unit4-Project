@@ -25,7 +25,7 @@ class Lockbox {
 
     //Methods
     /* Lockbox Runtime Methods */
-        
+        void Runtime();
 
     /* Access Manager */
         //Initialise Access Manager

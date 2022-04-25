@@ -17,7 +17,18 @@ Lockbox::Lockbox(PinName fsrPin, PinName buzzerPin, PinName tmpPin)
         flashingLEDs = new IndicatorLED(PA_13, PA_14);
 }
 
+// **********************************************************************
+// Lockbox Runtime methods
+void Lockbox::Runtime() {
+    while (true) {
+        //Flashing LEDs
+        flashingLEDs->TickLED(_state);
+        //Enter a passcode and unlock
+        LockboxLockUnlock();
 
+        sleep();
+    }
+}
 
 // **********************************************************************
 // Access Manager Related Methods
