@@ -23,10 +23,12 @@ void Lockbox::Runtime() {
     while (true) {
         //Flashing LEDs
         flashingLEDs->TickLED(_state);
-        //Enter a passcode and unlock
-        LockboxLockUnlock();
-        
 
+        //Interrupts
+        //Check for passcode entry and if yes and unlock
+        LockboxLockUnlock();
+        //Check for excessive force and if yes sound alarm
+        PlayForceAlarm();
         //Sleep
         sleep();
     }
@@ -88,18 +90,25 @@ int Lockbox::GetState() {
 // Force Sensor Related Methods
 void Lockbox::PlayForceAlarm() {
     force_sensor.ReadFSR();
-    force_sensor.PrintForceValue();
-
-    if (force_sensor.GetForceValue() > 0.6) {
-        //turn on buzzer and display alert message
-        screen->dispAlert();
-        alarm.PlayNote(NOTE_C5);
-    } else {
-        //turn off buzzer and clear screen
-        alarm.SetPulse_us(0);
-        screen->clearLCD();
-    }
     
+    //force_sensor.PrintForceValue();
+
+    if (force_sensor.GetForceValue() < 0.6) {
+      // turn off buzzer, clear screen and redisplay state
+      alarm.SetPulse_us(0);
+      screen->clearLCD();
+      if (_state) {
+          screen->dispUnlocked();
+      } else {
+          screen->dispLocked();
+      }
+    } else {
+      // turn on buzzer and display alert message
+      screen->clearLCD();
+      screen->dispAlert();
+      alarm.PlayNote(NOTE_C5);
+    }
+
     ThisThread::sleep_for(100ms);  
 }
 
