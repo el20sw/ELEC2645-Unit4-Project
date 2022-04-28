@@ -27,5 +27,6 @@ bool TempSensor::isExceeded(){
 }
 
 void TempSensor::PrintTempValue(){
-    printf("Temperature = %.3f\n", 1 / _TempValue);
+    ThisThread::sleep_for(100ms);
+    printf("Temperature = %.3f\n", _TempValue);
 }

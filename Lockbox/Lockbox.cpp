@@ -23,11 +23,14 @@ void Lockbox::Runtime() {
     while (true) {
         //Flashing LEDs
         flashingLEDs->TickLED(_state);
-        //Enter a passcode and unlock
+
+        //Interrupts
+        //Check for passcode entry and if yes and unlock
         LockboxLockUnlock();
-        //Print current state to console
-        PrintState(_state);
-        ThisThread::sleep_for(500ms);
+        //Check for excessive force and if yes sound alarm
+        PlayForceAlarm();
+        //Check for excessive temperature and if yes sound alarm
+        PlayTempAlarm();
 
         //Sleep
         sleep();
@@ -60,8 +63,8 @@ void Lockbox::LockboxLockUnlock() {
             LockboxStateChange();
         }
     } else {
-        //If button not pressed go to sleep
-        sleep();
+        //Do nothing
+        ;
     }
 }
 
@@ -71,14 +74,14 @@ void Lockbox::LockboxStateChange() {
     ThisThread::sleep_for(2s);
     screen->clearLCD();
 
-    if (PasscodeState) {
+    if (!PasscodeState) {
+        _state = 0;
+        ThisThread::sleep_for(100ms);
+        screen->dispLocked();
+    } else {
         _state = 1;
         ThisThread::sleep_for(100ms);
         screen->dispUnlocked();
-    } else {
-        _state = 0;
-        ThisThread::sleep_for(100ms);
-        screen -> dispLocked();
     }
 }
 
@@ -90,19 +93,50 @@ int Lockbox::GetState() {
 // Force Sensor Related Methods
 void Lockbox::PlayForceAlarm() {
     force_sensor.ReadFSR();
-    force_sensor.PrintForceValue();
-
-    if (force_sensor.GetForceValue() > 0.6) {
-        //turn on buzzer and display alert message
-        screen->dispAlert();
-        alarm.PlayNote(NOTE_C5);
-    } else {
-        //turn off buzzer and clear screen
-        alarm.SetPulse_us(0);
-        screen->clearLCD();
-    }
     
+    //force_sensor.PrintForceValue();
+
+    if (force_sensor.GetForceValue() < 0.6) {
+      // turn off buzzer, clear screen and redisplay state
+      alarm.SetPulse_us(0);
+      screen->clearLCD();
+      if (_state) {
+          screen->dispUnlocked();
+      } else {
+          screen->dispLocked();
+      }
+    } else {
+      // turn on buzzer and display alert message
+      screen->clearLCD();
+      screen->dispAlert();
+      alarm.PlayNote(NOTE_C5);
+    }
+
     ThisThread::sleep_for(100ms);  
+}
+
+// **********************************************************************
+// Temperature Sensor Related Methods
+void Lockbox::PlayTempAlarm() {
+    temp_sensor.ReadTemp();
+
+    //temp_sensor.PrintTempValue();
+
+    if (temp_sensor.GetTempValue() < 0.5) {
+      // turn off buzzer, clear screen and display state
+      alarm.SetPulse_us(0);
+      screen->clearLCD();
+      if (_state) {
+          screen->dispUnlocked();
+      } else {
+          screen->dispLocked();
+      }
+    } else {
+      // turn on buzzer and display alert message
+      screen->clearLCD();
+      screen->dispAlert();
+      alarm.PlayNote(NOTE_B4);
+    }    
 }
 
 // **********************************************************************

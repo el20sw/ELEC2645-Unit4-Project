@@ -97,21 +97,19 @@ bool AccessManager::EnterPasscode() {
 
     _input.movement2 = _EnterSecondMotion();
 
-    if (PasscodeCheck()) {
-        //set state to unlocked
-        _lockScreen->clearLCD();
-        ThisThread::sleep_for(100ms);
-        _lockScreen->CorrectPasscodeMessage();
-        return true;
-
-    } else {
-        //remain locked
+    if (!PasscodeCheck()) {
+        // remain locked
         _lockScreen->clearLCD();
         ThisThread::sleep_for(100ms);
         _lockScreen->IncorrectPasscodeMessage();
         return false;
+    } else {
+        // set state to unlocked
+        _lockScreen->clearLCD();
+        ThisThread::sleep_for(100ms);
+        _lockScreen->CorrectPasscodeMessage();
+        return true;
     }
-
 }
 
 Direction AccessManager::_EnterFirstMotion() {

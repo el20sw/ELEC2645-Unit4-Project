@@ -7,6 +7,8 @@
 
 #include "mbed.h"
 
+#define BLINK_INTERVAL  2s
+
 class IndicatorLED {
     public:
     //Constructor
