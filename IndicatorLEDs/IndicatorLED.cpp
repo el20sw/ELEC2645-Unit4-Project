@@ -14,7 +14,7 @@ void IndicatorLED::InitLED() {
 }
 
 void IndicatorLED::AttachTicker() {
-    _ledFlasher->attach(callback(this, &IndicatorLED::ledFlagChange_ISR), 3s);
+    _ledFlasher->attach(callback(this, &IndicatorLED::ledFlagChange_ISR), BLINK_INTERVAL);
 }
 
 void IndicatorLED::DetachTicker() {
