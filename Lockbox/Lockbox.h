@@ -41,6 +41,10 @@ class Lockbox {
         //Sounds single note when FSR exceeds 60%
         void PlayForceAlarm();
 
+    /* Temperature Alarm */
+        //Sounds alarm when temperature exceeds 50deg/c
+        void PlayTempAlarm();
+
     /* Debugging Methods */
         //Method to print the current state - locked or unlocked
         void PrintState(int state);

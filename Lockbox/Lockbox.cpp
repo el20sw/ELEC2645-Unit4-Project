@@ -29,6 +29,9 @@ void Lockbox::Runtime() {
         LockboxLockUnlock();
         //Check for excessive force and if yes sound alarm
         PlayForceAlarm();
+        //Check for excessive temperature and if yes sound alarm
+        PlayTempAlarm();
+
         //Sleep
         sleep();
     }
@@ -110,6 +113,30 @@ void Lockbox::PlayForceAlarm() {
     }
 
     ThisThread::sleep_for(100ms);  
+}
+
+// **********************************************************************
+// Temperature Sensor Related Methods
+void Lockbox::PlayTempAlarm() {
+    temp_sensor.ReadTemp();
+
+    //temp_sensor.PrintTempValue();
+
+    if (temp_sensor.GetTempValue() < 0.5) {
+      // turn off buzzer, clear screen and display state
+      alarm.SetPulse_us(0);
+      screen->clearLCD();
+      if (_state) {
+          screen->dispUnlocked();
+      } else {
+          screen->dispLocked();
+      }
+    } else {
+      // turn on buzzer and display alert message
+      screen->clearLCD();
+      screen->dispAlert();
+      alarm.PlayNote(NOTE_B4);
+    }    
 }
 
 // **********************************************************************
