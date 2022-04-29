@@ -9,20 +9,22 @@ BufferedSerial pc(USBTX, USBRX, 115200);
 Lockbox lockbox(PA_1, PA_15, PC_5);
 
 //Function Declaration
-void PasscodeInitialisation();
+void ShowPasscode();
 
 int main(){
-    //Initialisation
-    PasscodeInitialisation();
+    
+    //Debugging
+        //Initialisation
+        ShowPasscode();
+        //Print state
+        lockbox.PrintState(lockbox.GetState());
 
-    //Print state
-    lockbox.PrintState(lockbox.GetState());
-
+    //Runtime
     lockbox.Runtime();
 
 }
 
-void PasscodeInitialisation() {
+void ShowPasscode() {
     ThisThread::sleep_for(2s);
     lockbox.ShowPasscode();
 }
