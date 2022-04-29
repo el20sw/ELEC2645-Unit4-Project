@@ -35,4 +35,3 @@ class TempSensor {
 };
 
 #endif
-
