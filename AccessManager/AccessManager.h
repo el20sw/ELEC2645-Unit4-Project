@@ -11,7 +11,7 @@
 #include "ScreenController.h"
 #include "Joystick.h"
 
-//Passcode
+//Passcode Structure
 struct Passcode {
     Direction movement1;
     Direction movement2;
@@ -29,10 +29,12 @@ class AccessManager {
     //Methods
         //method to set a passcode
         void SetPasscode();
-        //method to print the passcode
-        void PrintPasscode();
         //method to enter a passcode returns 0 for locked, 1 for unlocked
         bool EnterPasscode();
+        
+    // Debugging
+        //method to print the passcode
+        void PrintPasscode();
 
     private:
     //Objects

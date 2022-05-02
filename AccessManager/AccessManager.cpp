@@ -1,6 +1,8 @@
 #include "AccessManager.h"
 #include <cstdio>
 
+// **********************************************************************
+// Constructor
 AccessManager::AccessManager(ScreenController *screen) : _passcode(), _input() {
     //                         y     x
     _joystick = new Joystick(PC_3, PC_2);
@@ -9,12 +11,13 @@ AccessManager::AccessManager(ScreenController *screen) : _passcode(), _input() {
     _lockScreen = screen;
 }
 
-
 AccessManager::~AccessManager() {
     delete _joystick;
     delete _lockScreen;
 }
 
+// **********************************************************************
+// Public Methods
 void AccessManager::SetPasscode() {
     // store direction in passcode movement 1
     _passcode.movement1 = _EnterFirstMotion();
@@ -33,11 +36,6 @@ void AccessManager::SetPasscode() {
     _lockScreen->PasscodeSetAffirmative();
     ThisThread::sleep_for(2s);
     _lockScreen->clearLCD();
-}
-
-bool AccessManager::isCenter() {
-    if (_joystick->get_direction() == CENTRE) return true;
-    else return false;
 }
 
 bool AccessManager::EnterPasscode() {
@@ -68,6 +66,13 @@ bool AccessManager::EnterPasscode() {
         _lockScreen->CorrectPasscodeMessage();
         return true;
     }
+}
+
+// **********************************************************************
+// Private Methods
+bool AccessManager::isCenter() {
+    if (_joystick->get_direction() == CENTRE) return true;
+    else return false;
 }
 
 Direction AccessManager::_EnterFirstMotion() {
@@ -101,6 +106,8 @@ bool AccessManager::PasscodeCheck() {
     else return false;
 }
 
+// **********************************************************************
+//Debugging
 void AccessManager::PrintPasscode() {
     #define code1   _passcode.movement1
     if (code1 == N) {
