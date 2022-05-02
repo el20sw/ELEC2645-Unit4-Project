@@ -1,5 +1,7 @@
 #include "ScreenController.h"
 
+// **********************************************************************
+// Constructor
 ScreenController::ScreenController() {
     _lcd = new N5110(PC_7, PA_9, PB_10, PB_5, PB_3, PA_10);
 }
@@ -10,6 +12,8 @@ ScreenController::~ScreenController() {
 }
 */
 
+// **********************************************************************
+// Public Methods
 void ScreenController:: ScreenOff(){
     _lcd->turnOff();
 }
