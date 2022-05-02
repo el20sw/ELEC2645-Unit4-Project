@@ -1,16 +1,17 @@
 #include "ForceSensor.h"
 
-//Constructors
+// **********************************************************************
+//Constructor
 ForceSensor::ForceSensor(PinName fsrPin){
     _inputPin = new AnalogIn(fsrPin);
 }
 
-//Destructors
 ForceSensor::~ForceSensor(){
     delete _inputPin;
 }
 
-//mutators
+// **********************************************************************
+// Public Methods
 void ForceSensor::ReadFSR(){
     _ForceValue = _inputPin -> read();
 }
