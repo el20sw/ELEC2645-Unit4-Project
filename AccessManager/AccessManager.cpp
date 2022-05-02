@@ -31,7 +31,7 @@ void AccessManager::SetPasscode() {
     _lockScreen->clearLCD();
     ThisThread::sleep_for(100ms);
     _lockScreen->PasscodeSetAffirmative();
-    ThisThread::sleep_for(1s);
+    ThisThread::sleep_for(2s);
     _lockScreen->clearLCD();
 }
 
