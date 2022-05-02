@@ -27,18 +27,20 @@ void ScreenController::clearLCD() {
 }
 
 void ScreenController::dispAlert() {
-    _lcd->printString(" Alert ", 22, 2);
+    _lcd->drawSprite(35, 12, 14, 13, (int*) alarmSprite_noFill);
+    _lcd->printString(" Alert ", 22, 4);
     _lcd->refresh();
-    //ThisThread::sleep_for(2s);
 }
 
 void ScreenController::dispLocked() {
-    _lcd->printString(" Locked ", 5, 3);
+    _lcd->drawSprite(35, 12, 16, 12, (int*) lockedSprite);
+    _lcd->printString(" Locked ", 18, 4);
     _lcd->refresh();
 }
 
 void ScreenController::dispUnlocked() {
-    _lcd->printString(" Unlocked ", 5, 3);
+    _lcd->drawSprite(35, 10, 18, 12, (int*) unlockedSprite);
+    _lcd->printString(" Unlocked ", 12, 4);
     _lcd->refresh();
 }
 
@@ -66,13 +68,13 @@ void ScreenController::RequestPasscode() {
 }
 
 void ScreenController::CorrectPasscodeMessage() {
-    _lcd->printString("Passcode", 0, 0);
-    _lcd->printString("Correct!", 0, 1);
+    _lcd->printString("Passcode", 18, 2);
+    _lcd->printString("Correct!", 19, 3);
     _lcd->refresh();
 }
 
 void ScreenController::IncorrectPasscodeMessage() {
-    _lcd->printString("Passcode", 0, 0);
-    _lcd->printString("Incorrect!", 0, 1);
+    _lcd->printString("Passcode", 18, 2);
+    _lcd->printString("Incorrect!", 13, 3);
     _lcd->refresh();
 }
