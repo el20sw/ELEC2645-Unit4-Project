@@ -12,19 +12,20 @@ Lockbox lockbox(PA_1, PA_15, PC_5);
 void ShowPasscode();
 
 int main(){
-    
-    //Debugging
-        //Initialisation
-        ShowPasscode();
-        //Print state
-        lockbox.PrintState(lockbox.GetState());
-
-    //Runtime
     lockbox.Runtime();
-
 }
 
+/*
 void ShowPasscode() {
     ThisThread::sleep_for(2s);
     lockbox.ShowPasscode();
 }
+*/
+
+/*
+//Debugging
+    //Initialisation
+    ShowPasscode();
+    //Print state
+    lockbox.PrintState(lockbox.GetState());
+*/
