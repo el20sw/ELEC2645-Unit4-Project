@@ -28,10 +28,6 @@ class TempSensor {
 
         float _TempValue;
         float _MaxTempValue;
-
-        //friend class Lockbox;
-
-
 };
 
 #endif

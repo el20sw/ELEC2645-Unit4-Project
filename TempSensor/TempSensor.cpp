@@ -1,9 +1,13 @@
 #include "TempSensor.h"
 
+// **********************************************************************
+// Constructor
 TempSensor::TempSensor(PinName tmpPin){
     _inputPin = new AnalogIn(tmpPin);
 }
 
+// **********************************************************************
+// Public Methods
 //mutators
 void TempSensor::ReadTemp(){
     _TempValue = _inputPin -> read();
