@@ -78,3 +78,19 @@ void ScreenController::IncorrectPasscodeMessage() {
     _lcd->printString("Incorrect!", 13, 3);
     _lcd->refresh();
 }
+
+void ScreenController::SetupMessageRoutine() {
+    _lcd->drawSprite(36, 8, 28, 13, (int*) keySprite);
+    _lcd->refresh();
+    ThisThread::sleep_for(1s);
+    _lcd->printString("LOCK", 15, 2);
+    _lcd->refresh();
+    ThisThread::sleep_for(500ms);
+    _lcd->printString("BOX", 48, 2);
+    _lcd->refresh();
+    ThisThread::sleep_for(2s);
+    _lcd->clear();
+    _lcd->printString("Setup", 28, 2);
+    _lcd->refresh();
+
+}
