@@ -43,19 +43,20 @@ void ScreenController::dispUnlocked() {
 }
 
 void ScreenController::RequestFirstMotion() {
-    _lcd->printString("Enter First", 0, 1);
-    _lcd->printString("Motion:", 0, 2);
+    _lcd->printString("Enter First", 0, 0);
+    _lcd->printString("Motion:", 0, 1);
     _lcd->refresh();
 }
 
 void ScreenController::RequestSecondMotion() {
-    _lcd->printString("Enter Second", 0, 1);
-    _lcd->printString("Motion:", 0, 2);
+    _lcd->printString("Enter Second", 0, 0);
+    _lcd->printString("Motion:", 0, 1);
     _lcd->refresh();
 }
 
 void ScreenController::PasscodeSetAffirmative() {
-    _lcd->printString("Passcode Set", 1, 1);
+    _lcd->printString("Passcode Set", 7, 2);
+    _lcd->drawLine(7, 26, 77, 26, 1);
     _lcd->refresh();
 }
 
