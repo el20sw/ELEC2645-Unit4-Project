@@ -40,53 +40,11 @@ bool AccessManager::isCenter() {
     else return false;
 }
 
-void AccessManager::PrintPasscode() {
-    #define code1   _passcode.movement1
-    if (code1 == N) {
-        printf("Movement 1: N");
-    } else if (code1 == NE) {
-        printf("Movement 1: NE");
-    } else if (code1 == E) {
-        printf("Movement 1: E");
-    } else if (code1 == SE) {
-        printf("Movement 1: SE");
-    } else if (code1 == S) {
-        printf("Movement 1: S");
-    } else if (code1 == SW) {
-        printf("Movement 1: SW");
-    } else if (code1 == W) {
-        printf("Movement 1: W");
-    } else if (code1 == NW) {
-        printf("Movement 1: NW");
-    }
-    printf("\n");
-
-    #define code2   _passcode.movement2
-    if (code2 == N) {
-        printf("Movement 2: N");
-    } else if (code2 == NE) {
-        printf("Movement 2: NE");
-    } else if (code2 == E) {
-        printf("Movement 2: E");
-    } else if (code2 == SE) {
-        printf("Movement 2: SE");
-    } else if (code2 == S) {
-        printf("Movement 2: S");
-    } else if (code2 == SW) {
-        printf("Movement 2: SW");
-    } else if (code2 == W) {
-        printf("Movement 2: W");
-    } else if (code2 == NW) {
-        printf("Movement 2: NW");
-    }
-    printf("\n");
-}
-
 bool AccessManager::EnterPasscode() {
     _lockScreen->clearLCD();
     ThisThread::sleep_for(100ms);
     _lockScreen->RequestPasscode();
-    ThisThread::sleep_for(500ms);
+    ThisThread::sleep_for(2s);
 
     _input.movement1 = _EnterFirstMotion();
 
@@ -141,4 +99,46 @@ Direction AccessManager::_EnterSecondMotion() {
 bool AccessManager::PasscodeCheck() {
     if ((_input.movement1 == _passcode.movement1) && (_input.movement2 == _passcode.movement2)) return true;
     else return false;
+}
+
+void AccessManager::PrintPasscode() {
+    #define code1   _passcode.movement1
+    if (code1 == N) {
+        printf("Movement 1: N");
+    } else if (code1 == NE) {
+        printf("Movement 1: NE");
+    } else if (code1 == E) {
+        printf("Movement 1: E");
+    } else if (code1 == SE) {
+        printf("Movement 1: SE");
+    } else if (code1 == S) {
+        printf("Movement 1: S");
+    } else if (code1 == SW) {
+        printf("Movement 1: SW");
+    } else if (code1 == W) {
+        printf("Movement 1: W");
+    } else if (code1 == NW) {
+        printf("Movement 1: NW");
+    }
+    printf("\n");
+
+    #define code2   _passcode.movement2
+    if (code2 == N) {
+        printf("Movement 2: N");
+    } else if (code2 == NE) {
+        printf("Movement 2: NE");
+    } else if (code2 == E) {
+        printf("Movement 2: E");
+    } else if (code2 == SE) {
+        printf("Movement 2: SE");
+    } else if (code2 == S) {
+        printf("Movement 2: S");
+    } else if (code2 == SW) {
+        printf("Movement 2: SW");
+    } else if (code2 == W) {
+        printf("Movement 2: W");
+    } else if (code2 == NW) {
+        printf("Movement 2: NW");
+    }
+    printf("\n");
 }
