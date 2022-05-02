@@ -2,7 +2,7 @@
 #include <cstdio>
 
 // **********************************************************************
-//Constructor
+// Constructor
 Lockbox::Lockbox(PinName fsrPin, PinName buzzerPin, PinName tmpPin) 
     : force_sensor(fsrPin), alarm(buzzerPin), temp_sensor(tmpPin) {
         //Create Screen Controller and initialise
