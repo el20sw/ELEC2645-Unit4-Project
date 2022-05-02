@@ -8,6 +8,8 @@ Lockbox::Lockbox(PinName fsrPin, PinName buzzerPin, PinName tmpPin)
         //Create Screen Controller and initialise
         screen = new ScreenController();
         screen->customInit();
+        //Lockbox Setup message
+        LockboxSetupMessage();
         //Create Access Manager and initialise
         access_manager = new AccessManager(screen);
         AccessManagerInit();
@@ -35,6 +37,14 @@ void Lockbox::Runtime() {
         //Sleep
         sleep();
     }
+}
+
+// **********************************************************************
+// Lockbox Initialisation methods
+void Lockbox::LockboxSetupMessage() {
+    screen->clearLCD();
+    screen->SetupMessageRoutine();
+    ThisThread::sleep_for(2s);
 }
 
 // **********************************************************************
