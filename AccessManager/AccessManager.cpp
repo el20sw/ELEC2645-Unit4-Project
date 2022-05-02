@@ -44,7 +44,7 @@ bool AccessManager::EnterPasscode() {
     _lockScreen->clearLCD();
     ThisThread::sleep_for(100ms);
     _lockScreen->RequestPasscode();
-    ThisThread::sleep_for(2s);
+    ThisThread::sleep_for(1500ms);
 
     _input.movement1 = _EnterFirstMotion();
 
