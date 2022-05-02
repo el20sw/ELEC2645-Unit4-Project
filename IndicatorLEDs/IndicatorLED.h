@@ -49,10 +49,7 @@ class IndicatorLED {
 
     //Variables
         volatile int _ledIndicator_flag = 0;
-
-        
-
-        
+  
 };
 
 #endif

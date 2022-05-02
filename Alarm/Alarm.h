@@ -22,7 +22,7 @@ class Alarm {
     //Constructors
         Alarm(PinName buzzerPin);
     //Destructor
-        //~Alarm(); redundant when using direct initialisation
+        //~Alarm(); redundant
     //Methods
         //Method to play a single note
         void PlayNote(int frequency);

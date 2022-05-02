@@ -1,15 +1,13 @@
 #include "Alarm.h"
 
+// **********************************************************************
+// Constructor
 Alarm::Alarm(PinName buzzerPin) : _alarmPin(buzzerPin) {
    //_alarmPin = new PwmOut(buzzerPin);
 }
 
-/*
-Alarm::~Alarm(){
-    delete _alarmPin;
-}
-*/
-
+// **********************************************************************
+// Public Methods
 void Alarm::PlayNote(int frequency){
     _alarmPin.period_us((float) 1000000.0f/ (float) frequency);
     _alarmPin.pulsewidth_us((_alarmPin.read_period_us())/2);

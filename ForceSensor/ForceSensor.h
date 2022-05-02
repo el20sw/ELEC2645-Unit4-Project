@@ -10,9 +10,9 @@
 
 class ForceSensor {
     public:
-    //Constructors
+    //Constructor
         ForceSensor(PinName fsrPin);
-    //Destructors
+    //Destructor
         ~ForceSensor();
     //Methods
         //mutators

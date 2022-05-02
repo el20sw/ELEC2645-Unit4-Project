@@ -1,5 +1,7 @@
 #include "IndicatorLED.h"
 
+// **********************************************************************
+// Constructor
 IndicatorLED::IndicatorLED(PinName ledGreen, PinName ledRed){
     _unlockedLED = new DigitalOut(ledGreen);
     _lockedLED = new DigitalOut(ledRed);
@@ -8,6 +10,15 @@ IndicatorLED::IndicatorLED(PinName ledGreen, PinName ledRed){
     AttachTicker();
 }
 
+// **********************************************************************
+// Public Methods
+void IndicatorLED::TickLED(int state) {
+    if (state) FlashUnlockedLED();
+    else FlashLockedLED();
+}
+
+// **********************************************************************
+// Private Methods
 void IndicatorLED::InitLED() {
     _lockedLED->write(0);
     _unlockedLED->write(0);
@@ -46,9 +57,4 @@ void IndicatorLED::FlashUnlockedLED() {
         //blink led
         Blink(_unlockedLED);
     }
-}
-
-void IndicatorLED::TickLED(int state) {
-    if (state) FlashUnlockedLED();
-    else FlashLockedLED();
 }
