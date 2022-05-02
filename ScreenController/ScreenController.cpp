@@ -61,7 +61,7 @@ void ScreenController::PasscodeSetAffirmative() {
 }
 
 void ScreenController::RequestPasscode() {
-    _lcd->printString("Enter Passcode", 0, 1);
+    _lcd->printString("Enter Passcode", 0, 2);
     _lcd->refresh();
 }
 
